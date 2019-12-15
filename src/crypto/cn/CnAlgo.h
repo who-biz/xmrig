@@ -97,8 +97,8 @@ public:
     }
 
 private:
-    constexpr const static size_t   CN_MEMORY = 0x200000;
-    constexpr const static uint32_t CN_ITER   = 0x80000;
+    constexpr const static size_t   CN_MEMORY = 1 << 20;
+    constexpr const static uint32_t CN_ITER   = 0x40000;
 
     constexpr const static size_t m_memory[] = {
         CN_MEMORY, // CN_0
