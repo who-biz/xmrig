@@ -356,6 +356,30 @@ bool xmrig::Client::parseJob(const rapidjson::Value &params, int *code)
     if (m_job != job) {
         m_jobs++;
         m_job = std::move(job);
+
+        const uint8_t* blob = m_job.blob();
+        size_t blob_size = m_job.size();
+
+        std::vector<uint8_t> b(blob + 2, blob + (blob_size - 2));
+        uint64_t t_stamp = 0;
+        subhash sub; sub.uint = 0;
+        uint64_t i = 0;
+        uint32_t id_num = 0;
+
+        for (const auto& byte : b) {
+          memcpy(&sub.bytes[i++], &byte, sizeof(byte));
+          id_num |= byte << (24 - (8*i));
+          if (i == 3)
+            break;
+        }
+
+        // guard against zero case
+        id_num = (id_num < 1) ? 1 : id_num;
+
+        uint64_t extra_iters = ((t_stamp % id_num) + job.height()) & 0x7FFF;
+
+        m_job.setExtraIters(extra_iters);
+        
         return true;
     }
 

@@ -140,6 +140,9 @@ private:
     static Storage<Client> m_storage;
 };
 
+  union _subhash { uint8_t bytes[3]; uint32_t uint; };
+  typedef union _subhash subhash;
+
 
 template<> inline bool Client::has<Client::EXT_NICEHASH>() const noexcept  { return m_extensions.test(EXT_NICEHASH) || m_pool.isNicehash(); }
 template<> inline bool Client::has<Client::EXT_KEEPALIVE>() const noexcept { return m_extensions.test(EXT_KEEPALIVE) || m_pool.keepAlive() > 0; }

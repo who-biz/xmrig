@@ -41,6 +41,9 @@ public:
     DaemonClient(int id, IClientListener *listener);
     ~DaemonClient() override;
 
+  union _subhash { uint8_t bytes[3]; uint32_t uint; };
+  typedef union _subhash subhash;
+
 protected:
     bool disconnect() override;
     bool isTLS() const override;
