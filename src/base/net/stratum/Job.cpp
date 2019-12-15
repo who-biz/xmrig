@@ -171,6 +171,7 @@ void xmrig::Job::copy(const Job &other)
     m_id        = other.m_id;
     m_diff      = other.m_diff;
     m_height    = other.m_height;
+    m_extra_iters = other.m_extra_iters;
     m_target    = other.m_target;
     m_index     = other.m_index;
 

@@ -69,6 +69,7 @@ public:
     inline uint32_t *nonce()                          { return reinterpret_cast<uint32_t*>(m_blob + 39); }
     inline uint64_t diff() const                      { return m_diff; }
     inline uint64_t height() const                    { return m_height; }
+    inline uint32_t extra_iters() const               { return m_extra_iters; }
     inline uint64_t target() const                    { return m_target; }
     inline uint8_t fixedByte() const                  { return *(m_blob + 42); }
     inline uint8_t index() const                      { return m_index; }
@@ -76,6 +77,7 @@ public:
     inline void setAlgorithm(const char *algo)        { m_algorithm = algo; }
     inline void setClientId(const String &id)         { m_clientId = id; }
     inline void setHeight(uint64_t height)            { m_height = height; }
+    inline void setExtraIters(uint32_t iters)         { m_extra_iters = extra_iters(); }
     inline void setIndex(uint8_t index)               { m_index = index; }
 
 #   ifdef XMRIG_PROXY_PROJECT
@@ -102,6 +104,7 @@ private:
     String m_id;
     uint64_t m_diff     = 0;
     uint64_t m_height   = 0;
+    uint32_t m_extra_iters = 0;
     uint64_t m_target   = 0;
     uint8_t m_blob[kMaxBlobSize];
     uint8_t m_index     = 0;
